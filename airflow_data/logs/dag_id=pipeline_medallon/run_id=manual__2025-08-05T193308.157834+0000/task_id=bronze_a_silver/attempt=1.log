@@ -1,0 +1,21 @@
+[2025-08-05T19:33:32.206+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_medallon.bronze_a_silver manual__2025-08-05T19:33:08.157834+00:00 [queued]>
+[2025-08-05T19:33:32.233+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_medallon.bronze_a_silver manual__2025-08-05T19:33:08.157834+00:00 [queued]>
+[2025-08-05T19:33:32.234+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-08-05T19:33:32.273+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): bronze_a_silver> on 2025-08-05 19:33:08.157834+00:00
+[2025-08-05T19:33:32.278+0000] {standard_task_runner.py:60} INFO - Started process 100 to run task
+[2025-08-05T19:33:32.281+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_medallon', 'bronze_a_silver', 'manual__2025-08-05T19:33:08.157834+00:00', '--job-id', '275', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_medallon_dag.py', '--cfg-path', '/tmp/tmpprea4r56']
+[2025-08-05T19:33:32.283+0000] {standard_task_runner.py:88} INFO - Job 275: Subtask bronze_a_silver
+[2025-08-05T19:33:32.371+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_medallon.bronze_a_silver manual__2025-08-05T19:33:08.157834+00:00 [running]> on host 70eaa744a05c
+[2025-08-05T19:33:32.548+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mateo.biasotto' AIRFLOW_CTX_DAG_ID='pipeline_medallon' AIRFLOW_CTX_TASK_ID='bronze_a_silver' AIRFLOW_CTX_EXECUTION_DATE='2025-08-05T19:33:08.157834+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-05T19:33:08.157834+00:00'
+[2025-08-05T19:33:32.550+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-05T19:33:32.552+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/airflow/scripts/minio_02_bronze_a_silver.py']
+[2025-08-05T19:33:32.560+0000] {subprocess.py:86} INFO - Output:
+[2025-08-05T19:33:33.649+0000] {subprocess.py:93} INFO - Conectando a MinIO en minio:9000...
+[2025-08-05T19:33:33.649+0000] {subprocess.py:93} INFO - Descargando 'data_sales.csv' desde bucket 'dev-local-bronze'...
+[2025-08-05T19:33:33.650+0000] {subprocess.py:93} INFO - Datos originales: 10005 filas, 21 columnas
+[2025-08-05T19:33:33.650+0000] {subprocess.py:93} INFO - Columnas encontradas: ['row_id', 'order_id', 'order_date', 'ship_date', 'ship_mode', 'customer_id', 'customer_name', 'segment', 'country', 'city', 'state', 'postal_code', 'region', 'product_id', 'category', 'sub_category', 'product_name', 'sales', 'quantity', 'discount', 'profit']
+[2025-08-05T19:33:33.650+0000] {subprocess.py:93} INFO - Datos limpios cargados en Silver como 'data_sales_silver.parquet'
+[2025-08-05T19:33:33.736+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-08-05T19:33:33.816+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=pipeline_medallon, task_id=bronze_a_silver, execution_date=20250805T193308, start_date=20250805T193332, end_date=20250805T193333
+[2025-08-05T19:33:33.901+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-08-05T19:33:33.985+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,32 @@
+[2025-08-04T14:10:05.868+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_medallon.cargar_a_bulk manual__2025-08-04T14:09:26+00:00 [queued]>
+[2025-08-04T14:10:05.897+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_medallon.cargar_a_bulk manual__2025-08-04T14:09:26+00:00 [queued]>
+[2025-08-04T14:10:05.898+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-08-04T14:10:05.974+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): cargar_a_bulk> on 2025-08-04 14:09:26+00:00
+[2025-08-04T14:10:05.979+0000] {standard_task_runner.py:60} INFO - Started process 194 to run task
+[2025-08-04T14:10:05.982+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_medallon', 'cargar_a_bulk', 'manual__2025-08-04T14:09:26+00:00', '--job-id', '149', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_medallon_dag.py', '--cfg-path', '/tmp/tmpc8wy1uyd']
+[2025-08-04T14:10:05.983+0000] {standard_task_runner.py:88} INFO - Job 149: Subtask cargar_a_bulk
+[2025-08-04T14:10:06.065+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_medallon.cargar_a_bulk manual__2025-08-04T14:09:26+00:00 [running]> on host 70eaa744a05c
+[2025-08-04T14:10:06.211+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mateo.biasotto' AIRFLOW_CTX_DAG_ID='pipeline_medallon' AIRFLOW_CTX_TASK_ID='cargar_a_bulk' AIRFLOW_CTX_EXECUTION_DATE='2025-08-04T14:09:26+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-04T14:09:26+00:00'
+[2025-08-04T14:10:06.212+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-04T14:10:06.213+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/airflow/scripts/minio_04_carga_a_transito.py']
+[2025-08-04T14:10:06.220+0000] {subprocess.py:86} INFO - Output:
+[2025-08-04T14:10:07.203+0000] {subprocess.py:93} INFO - /opt/airflow/scripts/minio_04_carga_a_transito.py:45: RemovedIn20Warning: Deprecated API features detected! These feature(s) are not compatible with SQLAlchemy 2.0. To prevent incompatible upgrades prior to updating applications, ensure requirements files are pinned to "sqlalchemy<2.0". Set environment variable SQLALCHEMY_WARN_20=1 to show all deprecation warnings.  Set environment variable SQLALCHEMY_SILENCE_UBER_WARNING=1 to silence this message. (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+[2025-08-04T14:10:07.204+0000] {subprocess.py:93} INFO -   conn.execute(
+[2025-08-04T14:10:07.204+0000] {subprocess.py:93} INFO - Conectando a MinIO en minio:9000...
+[2025-08-04T14:10:07.205+0000] {subprocess.py:93} INFO - Error al limpiar tablas bulk: 'Connection' object has no attribute 'commit'
+[2025-08-04T14:10:07.206+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-08-04T14:10:07.206+0000] {subprocess.py:93} INFO -   File "/opt/airflow/scripts/minio_04_carga_a_transito.py", line 48, in <module>
+[2025-08-04T14:10:07.207+0000] {subprocess.py:93} INFO -     conn.commit()
+[2025-08-04T14:10:07.207+0000] {subprocess.py:93} INFO - AttributeError: 'Connection' object has no attribute 'commit'
+[2025-08-04T14:10:07.308+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-08-04T14:10:07.326+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-08-04T14:10:07.332+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=pipeline_medallon, task_id=cargar_a_bulk, execution_date=20250804T140926, start_date=20250804T141005, end_date=20250804T141007
+[2025-08-04T14:10:07.377+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 149 for task cargar_a_bulk (Bash command failed. The command returned a non-zero exit code 1.; 194)
+[2025-08-04T14:10:07.400+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-08-04T14:10:07.495+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

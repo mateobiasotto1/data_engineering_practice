@@ -1,0 +1,78 @@
+[2025-07-30T22:00:01.983+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_medallon.crea_esquema_publico manual__2025-07-30T21:59:57+00:00 [queued]>
+[2025-07-30T22:00:02.068+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_medallon.crea_esquema_publico manual__2025-07-30T21:59:57+00:00 [queued]>
+[2025-07-30T22:00:02.069+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-07-30T22:00:02.112+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): crea_esquema_publico> on 2025-07-30 21:59:57+00:00
+[2025-07-30T22:00:02.116+0000] {standard_task_runner.py:60} INFO - Started process 304 to run task
+[2025-07-30T22:00:02.122+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_medallon', 'crea_esquema_publico', 'manual__2025-07-30T21:59:57+00:00', '--job-id', '49', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_medallon_dag.py', '--cfg-path', '/tmp/tmpx8ucibst']
+[2025-07-30T22:00:02.124+0000] {standard_task_runner.py:88} INFO - Job 49: Subtask crea_esquema_publico
+[2025-07-30T22:00:02.233+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_medallon.crea_esquema_publico manual__2025-07-30T21:59:57+00:00 [running]> on host 70eaa744a05c
+[2025-07-30T22:00:02.396+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mateo.biasotto' AIRFLOW_CTX_DAG_ID='pipeline_medallon' AIRFLOW_CTX_TASK_ID='crea_esquema_publico' AIRFLOW_CTX_EXECUTION_DATE='2025-07-30T21:59:57+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-30T21:59:57+00:00'
+[2025-07-30T22:00:02.398+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-07-30T22:00:02.399+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/airflow/scripts/01_crea_esquema_publico.py']
+[2025-07-30T22:00:02.407+0000] {subprocess.py:86} INFO - Output:
+[2025-07-30T22:00:02.636+0000] {subprocess.py:93} INFO - 🔗 Conectado a PostgreSQL en postgres:5432/medallon_db
+[2025-07-30T22:00:02.638+0000] {subprocess.py:93} INFO - ▶️ Ejecutando: /opt/airflow/sql/01_crear_tablas_public.sql
+[2025-07-30T22:00:02.638+0000] {subprocess.py:93} INFO - ⚠️ Error en la sentencia:
+[2025-07-30T22:00:02.639+0000] {subprocess.py:93} INFO - CREATE TABLE IF NOT EXISTS public.bulk_fact_ventas (
+[2025-07-30T22:00:02.640+0000] {subprocess.py:93} INFO -     taligent_id  VARCHAR PRIMARY KEY, -- clave concatenada order_id-product_id
+[2025-07-30T22:00:02.641+0000] {subprocess.py:93} INFO -     order_id     VARCHAR,
+[2025-07-30T22:00:02.641+0000] {subprocess.py:93} INFO -     order_date   DATE,
+[2025-07-30T22:00:02.642+0000] {subprocess.py:93} INFO -     ship_date    DATE,
+[2025-07-30T22:00:02.642+0000] {subprocess.py:93} INFO -     customer_id  VARCHAR REFERENCES public.dim_cliente(customer_id),
+[2025-07-30T22:00:02.643+0000] {subprocess.py:93} INFO -     product_id   VARCHAR REFERENCES public.dim_producto(product_id),
+[2025-07-30T22:00:02.644+0000] {subprocess.py:93} INFO -     sales        NUMERIC,
+[2025-07-30T22:00:02.645+0000] {subprocess.py:93} INFO -     quantity     INT,
+[2025-07-30T22:00:02.646+0000] {subprocess.py:93} INFO -     discount     NUMERIC,
+[2025-07-30T22:00:02.646+0000] {subprocess.py:93} INFO -     profit       NUMERIC
+[2025-07-30T22:00:02.647+0000] {subprocess.py:93} INFO - )
+[2025-07-30T22:00:02.647+0000] {subprocess.py:93} INFO - relation "public.dim_cliente" does not exist
+[2025-07-30T22:00:02.647+0000] {subprocess.py:93} INFO - 
+[2025-07-30T22:00:02.648+0000] {subprocess.py:93} INFO - ⚠️ Error en la sentencia:
+[2025-07-30T22:00:02.648+0000] {subprocess.py:93} INFO - -- ===============================================
+[2025-07-30T22:00:02.649+0000] {subprocess.py:93} INFO - -- TABLAS FINALES (PUBLIC)
+[2025-07-30T22:00:02.649+0000] {subprocess.py:93} INFO - -- ===============================================
+[2025-07-30T22:00:02.649+0000] {subprocess.py:93} INFO - 
+[2025-07-30T22:00:02.650+0000] {subprocess.py:93} INFO - -- Clientes (dimensión)
+[2025-07-30T22:00:02.650+0000] {subprocess.py:93} INFO - CREATE TABLE IF NOT EXISTS public.dim_cliente (
+[2025-07-30T22:00:02.651+0000] {subprocess.py:93} INFO -     customer_id   VARCHAR PRIMARY KEY,
+[2025-07-30T22:00:02.651+0000] {subprocess.py:93} INFO -     customer_name VARCHAR,
+[2025-07-30T22:00:02.652+0000] {subprocess.py:93} INFO -     segment       VARCHAR,
+[2025-07-30T22:00:02.652+0000] {subprocess.py:93} INFO -     country       VARCHAR,
+[2025-07-30T22:00:02.653+0000] {subprocess.py:93} INFO -     city          VARCHAR,
+[2025-07-30T22:00:02.653+0000] {subprocess.py:93} INFO -     state         VARCHAR,
+[2025-07-30T22:00:02.654+0000] {subprocess.py:93} INFO -     postal_code   VARCHAR,
+[2025-07-30T22:00:02.655+0000] {subprocess.py:93} INFO -     region        VARCHAR
+[2025-07-30T22:00:02.655+0000] {subprocess.py:93} INFO - )
+[2025-07-30T22:00:02.656+0000] {subprocess.py:93} INFO - current transaction is aborted, commands ignored until end of transaction block
+[2025-07-30T22:00:02.656+0000] {subprocess.py:93} INFO - 
+[2025-07-30T22:00:02.657+0000] {subprocess.py:93} INFO - ⚠️ Error en la sentencia:
+[2025-07-30T22:00:02.657+0000] {subprocess.py:93} INFO - -- Productos (dimensión)
+[2025-07-30T22:00:02.658+0000] {subprocess.py:93} INFO - CREATE TABLE IF NOT EXISTS public.dim_producto (
+[2025-07-30T22:00:02.658+0000] {subprocess.py:93} INFO -     product_id    VARCHAR PRIMARY KEY,
+[2025-07-30T22:00:02.659+0000] {subprocess.py:93} INFO -     product_name  VARCHAR,
+[2025-07-30T22:00:02.659+0000] {subprocess.py:93} INFO -     category      VARCHAR,
+[2025-07-30T22:00:02.659+0000] {subprocess.py:93} INFO -     sub_category  VARCHAR
+[2025-07-30T22:00:02.660+0000] {subprocess.py:93} INFO - )
+[2025-07-30T22:00:02.660+0000] {subprocess.py:93} INFO - current transaction is aborted, commands ignored until end of transaction block
+[2025-07-30T22:00:02.660+0000] {subprocess.py:93} INFO - 
+[2025-07-30T22:00:02.661+0000] {subprocess.py:93} INFO - ⚠️ Error en la sentencia:
+[2025-07-30T22:00:02.661+0000] {subprocess.py:93} INFO - -- Ventas (hechos)
+[2025-07-30T22:00:02.661+0000] {subprocess.py:93} INFO - CREATE TABLE IF NOT EXISTS public.fact_ventas (
+[2025-07-30T22:00:02.662+0000] {subprocess.py:93} INFO -     taligent_id  VARCHAR PRIMARY KEY, -- clave concatenada order_id-product_id
+[2025-07-30T22:00:02.662+0000] {subprocess.py:93} INFO -     order_id     VARCHAR,
+[2025-07-30T22:00:02.662+0000] {subprocess.py:93} INFO -     order_date   DATE,
+[2025-07-30T22:00:02.663+0000] {subprocess.py:93} INFO -     ship_date    DATE,
+[2025-07-30T22:00:02.663+0000] {subprocess.py:93} INFO -     customer_id  VARCHAR REFERENCES public.dim_cliente(customer_id),
+[2025-07-30T22:00:02.663+0000] {subprocess.py:93} INFO -     product_id   VARCHAR REFERENCES public.dim_producto(product_id),
+[2025-07-30T22:00:02.663+0000] {subprocess.py:93} INFO -     sales        NUMERIC,
+[2025-07-30T22:00:02.664+0000] {subprocess.py:93} INFO -     quantity     INT,
+[2025-07-30T22:00:02.664+0000] {subprocess.py:93} INFO -     discount     NUMERIC,
+[2025-07-30T22:00:02.664+0000] {subprocess.py:93} INFO -     profit       NUMERIC
+[2025-07-30T22:00:02.665+0000] {subprocess.py:93} INFO - )
+[2025-07-30T22:00:02.665+0000] {subprocess.py:93} INFO - current transaction is aborted, commands ignored until end of transaction block
+[2025-07-30T22:00:02.665+0000] {subprocess.py:93} INFO - 
+[2025-07-30T22:00:02.665+0000] {subprocess.py:93} INFO - ✅ Script ejecutado correctamente
+[2025-07-30T22:00:02.666+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-07-30T22:00:02.719+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=pipeline_medallon, task_id=crea_esquema_publico, execution_date=20250730T215957, start_date=20250730T220001, end_date=20250730T220002
+[2025-07-30T22:00:02.776+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-07-30T22:00:02.826+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

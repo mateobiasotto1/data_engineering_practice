@@ -1,0 +1,111 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: medallon_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: medallon_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio
+    container_name: medallon_minio
+    restart: always
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./minio_data:/data
+
+  airflow-init:
+    image: apache/airflow:2.8.1
+    container_name: medallon_airflow_init
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__WEBSERVER__ENABLE_PROXY_FIX=True
+    volumes:
+      - ./scripts:/opt/airflow/scripts
+      - ./sql:/opt/airflow/sql
+      - ./dags:/opt/airflow/dags
+      - ./requirements.txt:/requirements.txt
+      - ./airflow_data:/opt/airflow
+    entrypoint: >
+      bash -c "pip install --no-cache-dir -r /requirements.txt &&
+               airflow db init &&
+               airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com"
+    restart: "no"
+
+  airflow-webserver:
+    image: apache/airflow:2.8.1
+    container_name: medallon_airflow_webserver
+    restart: always
+    depends_on:
+      - postgres
+      - airflow-init
+      - minio
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__WEBSERVER__ENABLE_PROXY_FIX=True
+      # Variables MinIO para los scripts
+      - MINIO_HOST=minio:9000
+      - MINIO_USER=minio
+      - MINIO_PASSWORD=minio123
+      # Variables PostgreSQL (opcional si tus scripts las usan)
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=medallon_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./scripts:/opt/airflow/scripts
+      - ./sql:/opt/airflow/sql
+      - ./dags:/opt/airflow/dags
+      - ./requirements.txt:/requirements.txt
+      - ./airflow_data:/opt/airflow
+    command: >
+      bash -c "pip install --no-cache-dir -r /requirements.txt &&
+               exec airflow webserver"
+
+  airflow-scheduler:
+    image: apache/airflow:2.8.1
+    container_name: medallon_airflow_scheduler
+    restart: always
+    depends_on:
+      - postgres
+      - airflow-init
+      - minio
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      # Variables MinIO para los scripts
+      - MINIO_HOST=minio:9000
+      - MINIO_USER=minio
+      - MINIO_PASSWORD=minio123
+      # Variables PostgreSQL (opcional si tus scripts las usan)
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=medallon_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    volumes:
+      - ./scripts:/opt/airflow/scripts
+      - ./sql:/opt/airflow/sql
+      - ./dags:/opt/airflow/dags
+      - ./requirements.txt:/requirements.txt
+      - ./airflow_data:/opt/airflow
+    command: >
+      bash -c "pip install --no-cache-dir -r /requirements.txt &&
+               exec airflow scheduler"

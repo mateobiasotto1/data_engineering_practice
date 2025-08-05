@@ -1,0 +1,16 @@
+[2025-08-05T19:05:02.886+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_medallon.ejecutar_merge manual__2025-08-05T19:04:18.558608+00:00 [queued]>
+[2025-08-05T19:05:02.932+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_medallon.ejecutar_merge manual__2025-08-05T19:04:18.558608+00:00 [queued]>
+[2025-08-05T19:05:02.933+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-08-05T19:05:02.997+0000] {taskinstance.py:2191} INFO - Executing <Task(PostgresOperator): ejecutar_merge> on 2025-08-05 19:04:18.558608+00:00
+[2025-08-05T19:05:03.002+0000] {standard_task_runner.py:60} INFO - Started process 205 to run task
+[2025-08-05T19:05:03.008+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_medallon', 'ejecutar_merge', 'manual__2025-08-05T19:04:18.558608+00:00', '--job-id', '233', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_medallon_dag.py', '--cfg-path', '/tmp/tmpt_m2zxuy']
+[2025-08-05T19:05:03.010+0000] {standard_task_runner.py:88} INFO - Job 233: Subtask ejecutar_merge
+[2025-08-05T19:05:03.121+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_medallon.ejecutar_merge manual__2025-08-05T19:04:18.558608+00:00 [running]> on host 70eaa744a05c
+[2025-08-05T19:05:03.261+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mateo.biasotto' AIRFLOW_CTX_DAG_ID='pipeline_medallon' AIRFLOW_CTX_TASK_ID='ejecutar_merge' AIRFLOW_CTX_EXECUTION_DATE='2025-08-05T19:04:18.558608+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-05T19:04:18.558608+00:00'
+[2025-08-05T19:05:03.262+0000] {sql.py:276} INFO - Executing: CALL merge_bulk_to_final();
+[2025-08-05T19:05:03.273+0000] {base.py:83} INFO - Using connection ID 'postgres_medallon' for task execution.
+[2025-08-05T19:05:03.354+0000] {base.py:83} INFO - Using connection ID 'postgres_medallon' for task execution.
+[2025-08-05T19:05:03.381+0000] {sql.py:450} INFO - Running statement: CALL merge_bulk_to_final();, parameters: None
+[2025-08-05T19:05:04.313+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=pipeline_medallon, task_id=ejecutar_merge, execution_date=20250805T190418, start_date=20250805T190502, end_date=20250805T190504
+[2025-08-05T19:05:04.388+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-08-05T19:05:04.411+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

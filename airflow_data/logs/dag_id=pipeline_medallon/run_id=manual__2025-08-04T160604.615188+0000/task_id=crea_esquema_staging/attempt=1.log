@@ -1,0 +1,19 @@
+[2025-08-04T16:06:15.290+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_medallon.crea_esquema_staging manual__2025-08-04T16:06:04.615188+00:00 [queued]>
+[2025-08-04T16:06:15.323+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_medallon.crea_esquema_staging manual__2025-08-04T16:06:04.615188+00:00 [queued]>
+[2025-08-04T16:06:15.323+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-08-04T16:06:15.373+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): crea_esquema_staging> on 2025-08-04 16:06:04.615188+00:00
+[2025-08-04T16:06:15.378+0000] {standard_task_runner.py:60} INFO - Started process 66 to run task
+[2025-08-04T16:06:15.381+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_medallon', 'crea_esquema_staging', 'manual__2025-08-04T16:06:04.615188+00:00', '--job-id', '198', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_medallon_dag.py', '--cfg-path', '/tmp/tmpo_c9rq2w']
+[2025-08-04T16:06:15.383+0000] {standard_task_runner.py:88} INFO - Job 198: Subtask crea_esquema_staging
+[2025-08-04T16:06:15.481+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_medallon.crea_esquema_staging manual__2025-08-04T16:06:04.615188+00:00 [running]> on host 70eaa744a05c
+[2025-08-04T16:06:15.671+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mateo.biasotto' AIRFLOW_CTX_DAG_ID='pipeline_medallon' AIRFLOW_CTX_TASK_ID='crea_esquema_staging' AIRFLOW_CTX_EXECUTION_DATE='2025-08-04T16:06:04.615188+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-04T16:06:04.615188+00:00'
+[2025-08-04T16:06:15.673+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-04T16:06:15.674+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/airflow/scripts/postgres_02_crea_esquema_staging.py']
+[2025-08-04T16:06:15.683+0000] {subprocess.py:86} INFO - Output:
+[2025-08-04T16:06:15.920+0000] {subprocess.py:93} INFO - Conectado a PostgreSQL en postgres:5432/medallon_db
+[2025-08-04T16:06:15.921+0000] {subprocess.py:93} INFO - Ejecutando: /opt/airflow/sql/02_crear_tablas_staging.sql
+[2025-08-04T16:06:15.922+0000] {subprocess.py:93} INFO - Script ejecutado correctamente
+[2025-08-04T16:06:15.934+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-08-04T16:06:16.022+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=pipeline_medallon, task_id=crea_esquema_staging, execution_date=20250804T160604, start_date=20250804T160615, end_date=20250804T160616
+[2025-08-04T16:06:16.077+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-08-04T16:06:16.133+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

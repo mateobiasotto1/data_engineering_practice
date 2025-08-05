@@ -1,0 +1,87 @@
+[2025-08-04T15:09:27.684+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_medallon.cargar_a_bulk manual__2025-08-04T15:08:48+00:00 [queued]>
+[2025-08-04T15:09:27.712+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_medallon.cargar_a_bulk manual__2025-08-04T15:08:48+00:00 [queued]>
+[2025-08-04T15:09:27.712+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-08-04T15:09:27.803+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): cargar_a_bulk> on 2025-08-04 15:08:48+00:00
+[2025-08-04T15:09:27.809+0000] {standard_task_runner.py:60} INFO - Started process 180 to run task
+[2025-08-04T15:09:27.813+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_medallon', 'cargar_a_bulk', 'manual__2025-08-04T15:08:48+00:00', '--job-id', '169', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_medallon_dag.py', '--cfg-path', '/tmp/tmpk41joa_i']
+[2025-08-04T15:09:27.816+0000] {standard_task_runner.py:88} INFO - Job 169: Subtask cargar_a_bulk
+[2025-08-04T15:09:27.912+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_medallon.cargar_a_bulk manual__2025-08-04T15:08:48+00:00 [running]> on host 70eaa744a05c
+[2025-08-04T15:09:28.064+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mateo.biasotto' AIRFLOW_CTX_DAG_ID='pipeline_medallon' AIRFLOW_CTX_TASK_ID='cargar_a_bulk' AIRFLOW_CTX_EXECUTION_DATE='2025-08-04T15:08:48+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-04T15:08:48+00:00'
+[2025-08-04T15:09:28.065+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-04T15:09:28.066+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/airflow/scripts/minio_04_carga_a_transito.py']
+[2025-08-04T15:09:28.074+0000] {subprocess.py:86} INFO - Output:
+[2025-08-04T15:09:29.551+0000] {subprocess.py:93} INFO - Conectando a MinIO en minio:9000...
+[2025-08-04T15:09:29.552+0000] {subprocess.py:93} INFO - Tablas bulk limpiadas correctamente antes de la carga.
+[2025-08-04T15:09:29.553+0000] {subprocess.py:93} INFO - Cargando dim_cliente.parquet (4910 filas) a bulk_dim_cliente...
+[2025-08-04T15:09:29.554+0000] {subprocess.py:93} INFO -    🔹 bulk_dim_cliente: 4910 → 793 filas tras limpiar nulos y duplicados en customer_id.
+[2025-08-04T15:09:29.554+0000] {subprocess.py:93} INFO - 793 filas cargadas en bulk_dim_cliente
+[2025-08-04T15:09:29.555+0000] {subprocess.py:93} INFO - Cargando dim_producto.parquet (1894 filas) a bulk_dim_producto...
+[2025-08-04T15:09:29.555+0000] {subprocess.py:93} INFO -    🔹 bulk_dim_producto: 1894 → 1862 filas tras limpiar nulos y duplicados en product_id.
+[2025-08-04T15:09:29.566+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-08-04T15:09:29.567+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+[2025-08-04T15:09:29.567+0000] {subprocess.py:93} INFO -     self.dialect.do_executemany(
+[2025-08-04T15:09:29.568+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+[2025-08-04T15:09:29.569+0000] {subprocess.py:93} INFO -     context._psycopg2_fetched_rows = xtras.execute_values(
+[2025-08-04T15:09:29.569+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/extras.py", line 1299, in execute_values
+[2025-08-04T15:09:29.569+0000] {subprocess.py:93} INFO -     cur.execute(b''.join(parts))
+[2025-08-04T15:09:29.570+0000] {subprocess.py:93} INFO - psycopg2.errors.UndefinedColumn: column "sub-category" of relation "bulk_dim_producto" does not exist
+[2025-08-04T15:09:29.570+0000] {subprocess.py:93} INFO - LINE 1: ...dim_producto (product_id, product_name, category, "sub-categ...
+[2025-08-04T15:09:29.571+0000] {subprocess.py:93} INFO -                                                              ^
+[2025-08-04T15:09:29.572+0000] {subprocess.py:93} INFO - 
+[2025-08-04T15:09:29.572+0000] {subprocess.py:93} INFO - 
+[2025-08-04T15:09:29.573+0000] {subprocess.py:93} INFO - The above exception was the direct cause of the following exception:
+[2025-08-04T15:09:29.573+0000] {subprocess.py:93} INFO - 
+[2025-08-04T15:09:29.574+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-08-04T15:09:29.574+0000] {subprocess.py:93} INFO -   File "/opt/airflow/scripts/minio_04_carga_a_transito.py", line 99, in <module>
+[2025-08-04T15:09:29.575+0000] {subprocess.py:93} INFO -     df.to_sql(tabla_pg, engine, if_exists="append", index=False, schema="public")
+[2025-08-04T15:09:29.575+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 2878, in to_sql
+[2025-08-04T15:09:29.576+0000] {subprocess.py:93} INFO -     return sql.to_sql(
+[2025-08-04T15:09:29.577+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 769, in to_sql
+[2025-08-04T15:09:29.577+0000] {subprocess.py:93} INFO -     return pandas_sql.to_sql(
+[2025-08-04T15:09:29.578+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1920, in to_sql
+[2025-08-04T15:09:29.578+0000] {subprocess.py:93} INFO -     total_inserted = sql_engine.insert_records(
+[2025-08-04T15:09:29.579+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1470, in insert_records
+[2025-08-04T15:09:29.579+0000] {subprocess.py:93} INFO -     raise err
+[2025-08-04T15:09:29.579+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1461, in insert_records
+[2025-08-04T15:09:29.580+0000] {subprocess.py:93} INFO -     return table.insert(chunksize=chunksize, method=method)
+[2025-08-04T15:09:29.580+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1023, in insert
+[2025-08-04T15:09:29.581+0000] {subprocess.py:93} INFO -     num_inserted = exec_insert(conn, keys, chunk_iter)
+[2025-08-04T15:09:29.581+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 929, in _execute_insert
+[2025-08-04T15:09:29.582+0000] {subprocess.py:93} INFO -     result = conn.execute(self.table.insert(), data)
+[2025-08-04T15:09:29.582+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+[2025-08-04T15:09:29.583+0000] {subprocess.py:93} INFO -     return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+[2025-08-04T15:09:29.584+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+[2025-08-04T15:09:29.584+0000] {subprocess.py:93} INFO -     return connection._execute_clauseelement(
+[2025-08-04T15:09:29.585+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+[2025-08-04T15:09:29.585+0000] {subprocess.py:93} INFO -     ret = self._execute_context(
+[2025-08-04T15:09:29.585+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+[2025-08-04T15:09:29.586+0000] {subprocess.py:93} INFO -     self._handle_dbapi_exception(
+[2025-08-04T15:09:29.586+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+[2025-08-04T15:09:29.587+0000] {subprocess.py:93} INFO -     util.raise_(
+[2025-08-04T15:09:29.587+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+[2025-08-04T15:09:29.588+0000] {subprocess.py:93} INFO -     raise exception
+[2025-08-04T15:09:29.588+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+[2025-08-04T15:09:29.589+0000] {subprocess.py:93} INFO -     self.dialect.do_executemany(
+[2025-08-04T15:09:29.589+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+[2025-08-04T15:09:29.589+0000] {subprocess.py:93} INFO -     context._psycopg2_fetched_rows = xtras.execute_values(
+[2025-08-04T15:09:29.590+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/extras.py", line 1299, in execute_values
+[2025-08-04T15:09:29.590+0000] {subprocess.py:93} INFO -     cur.execute(b''.join(parts))
+[2025-08-04T15:09:29.591+0000] {subprocess.py:93} INFO - sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column "sub-category" of relation "bulk_dim_producto" does not exist
+[2025-08-04T15:09:29.591+0000] {subprocess.py:93} INFO - LINE 1: ...dim_producto (product_id, product_name, category, "sub-categ...
+[2025-08-04T15:09:29.591+0000] {subprocess.py:93} INFO -                                                              ^
+[2025-08-04T15:09:29.592+0000] {subprocess.py:93} INFO - 
+[2025-08-04T15:09:29.592+0000] {subprocess.py:93} INFO - [SQL: INSERT INTO public.bulk_dim_producto (product_id, product_name, category, "sub-category") VALUES (%(product_id)s, %(product_name)s, %(category)s, %(sub-category)s)]
+[2025-08-04T15:09:29.593+0000] {subprocess.py:93} INFO - [parameters: ({'product_id': 'FUR-BO-10001798', 'product_name': 'Bush Somerset Collection Bookcase', 'category': 'Furniture', 'sub-category': 'Bookcases'}, {'product_id': 'FUR-CH-10000454', 'product_name': 'Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back', 'category': 'Furniture', 'sub-category': 'Chairs'}, {'product_id': 'OFF-LA-10000240', 'product_name': 'Self-Adhesive Address Labels for Typewriters by Universal', 'category': 'Office Supplies', 'sub-category': 'Labels'}, {'product_id': 'FUR-TA-10000577', 'product_name': 'Bretford CR4500 Series Slim Rectangular Table', 'category': 'Furniture', 'sub-category': 'Tables'}, {'product_id': 'OFF-ST-10000760', 'product_name': "Eldon Fold 'N Roll Cart System", 'category': 'Office Supplies', 'sub-category': 'Storage'}, {'product_id': 'FUR-FU-10001487', 'product_name': 'Eldon Expressions Wood and Plastic Desk Accessories, Cherry Wood', 'category': 'Furniture', 'sub-category': 'Furnishings'}, {'product_id': 'OFF-AR-10002833', 'product_name': 'Newell 322', 'category': 'Office Supplies', 'sub-category': 'Art'}, {'product_id': 'TEC-PH-10002275', 'product_name': 'Mitel 5320 IP Phone VoIP phone', 'category': 'Technology', 'sub-category': 'Phones'}  ... displaying 10 of 1862 total bound parameter sets ...  {'product_id': 'TEC-PH-10002645', 'product_name': 'LG G2', 'category': 'Technology', 'sub-category': 'Phones'}, {'product_id': 'OFF-ST-10001627', 'product_name': 'Eldon Jumbo ProFile Portable File Boxes Graphite/Black', 'category': 'Office Supplies', 'sub-category': 'Storage'})]
+[2025-08-04T15:09:29.593+0000] {subprocess.py:93} INFO - (Background on this error at: https://sqlalche.me/e/14/f405)
+[2025-08-04T15:09:29.682+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-08-04T15:09:29.699+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-08-04T15:09:29.703+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=pipeline_medallon, task_id=cargar_a_bulk, execution_date=20250804T150848, start_date=20250804T150927, end_date=20250804T150929
+[2025-08-04T15:09:29.761+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 169 for task cargar_a_bulk (Bash command failed. The command returned a non-zero exit code 1.; 180)
+[2025-08-04T15:09:29.805+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-08-04T15:09:29.835+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,81 @@
+[2025-08-04T14:24:50.606+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_medallon.cargar_a_bulk manual__2025-08-04T14:24:10+00:00 [queued]>
+[2025-08-04T14:24:50.626+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_medallon.cargar_a_bulk manual__2025-08-04T14:24:10+00:00 [queued]>
+[2025-08-04T14:24:50.627+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-08-04T14:24:50.666+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): cargar_a_bulk> on 2025-08-04 14:24:10+00:00
+[2025-08-04T14:24:50.670+0000] {standard_task_runner.py:60} INFO - Started process 181 to run task
+[2025-08-04T14:24:50.673+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_medallon', 'cargar_a_bulk', 'manual__2025-08-04T14:24:10+00:00', '--job-id', '159', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_medallon_dag.py', '--cfg-path', '/tmp/tmpkn6rg0x0']
+[2025-08-04T14:24:50.675+0000] {standard_task_runner.py:88} INFO - Job 159: Subtask cargar_a_bulk
+[2025-08-04T14:24:50.758+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_medallon.cargar_a_bulk manual__2025-08-04T14:24:10+00:00 [running]> on host 70eaa744a05c
+[2025-08-04T14:24:50.910+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mateo.biasotto' AIRFLOW_CTX_DAG_ID='pipeline_medallon' AIRFLOW_CTX_TASK_ID='cargar_a_bulk' AIRFLOW_CTX_EXECUTION_DATE='2025-08-04T14:24:10+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-04T14:24:10+00:00'
+[2025-08-04T14:24:50.912+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-04T14:24:50.913+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/airflow/scripts/minio_04_carga_a_transito.py']
+[2025-08-04T14:24:50.920+0000] {subprocess.py:86} INFO - Output:
+[2025-08-04T14:24:52.168+0000] {subprocess.py:93} INFO - Conectando a MinIO en minio:9000...
+[2025-08-04T14:24:52.169+0000] {subprocess.py:93} INFO - Tablas bulk limpiadas correctamente antes de la carga.
+[2025-08-04T14:24:52.169+0000] {subprocess.py:93} INFO - Cargando dim_cliente.parquet (4910 filas) a bulk_dim_cliente...
+[2025-08-04T14:24:52.185+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-08-04T14:24:52.186+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+[2025-08-04T14:24:52.186+0000] {subprocess.py:93} INFO -     self.dialect.do_executemany(
+[2025-08-04T14:24:52.187+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+[2025-08-04T14:24:52.188+0000] {subprocess.py:93} INFO -     context._psycopg2_fetched_rows = xtras.execute_values(
+[2025-08-04T14:24:52.188+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/extras.py", line 1299, in execute_values
+[2025-08-04T14:24:52.189+0000] {subprocess.py:93} INFO -     cur.execute(b''.join(parts))
+[2025-08-04T14:24:52.189+0000] {subprocess.py:93} INFO - psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "bulk_dim_cliente_pkey"
+[2025-08-04T14:24:52.190+0000] {subprocess.py:93} INFO - DETAIL:  Key (customer_id)=(TB-21520) already exists.
+[2025-08-04T14:24:52.190+0000] {subprocess.py:93} INFO - 
+[2025-08-04T14:24:52.191+0000] {subprocess.py:93} INFO - 
+[2025-08-04T14:24:52.191+0000] {subprocess.py:93} INFO - The above exception was the direct cause of the following exception:
+[2025-08-04T14:24:52.192+0000] {subprocess.py:93} INFO - 
+[2025-08-04T14:24:52.192+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-08-04T14:24:52.193+0000] {subprocess.py:93} INFO -   File "/opt/airflow/scripts/minio_04_carga_a_transito.py", line 72, in <module>
+[2025-08-04T14:24:52.194+0000] {subprocess.py:93} INFO -     df.to_sql(tabla_pg, engine, if_exists="append", index=False, schema="public")
+[2025-08-04T14:24:52.194+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 2878, in to_sql
+[2025-08-04T14:24:52.195+0000] {subprocess.py:93} INFO -     return sql.to_sql(
+[2025-08-04T14:24:52.196+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 769, in to_sql
+[2025-08-04T14:24:52.196+0000] {subprocess.py:93} INFO -     return pandas_sql.to_sql(
+[2025-08-04T14:24:52.197+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1920, in to_sql
+[2025-08-04T14:24:52.197+0000] {subprocess.py:93} INFO -     total_inserted = sql_engine.insert_records(
+[2025-08-04T14:24:52.198+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1470, in insert_records
+[2025-08-04T14:24:52.198+0000] {subprocess.py:93} INFO -     raise err
+[2025-08-04T14:24:52.199+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1461, in insert_records
+[2025-08-04T14:24:52.199+0000] {subprocess.py:93} INFO -     return table.insert(chunksize=chunksize, method=method)
+[2025-08-04T14:24:52.200+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1023, in insert
+[2025-08-04T14:24:52.200+0000] {subprocess.py:93} INFO -     num_inserted = exec_insert(conn, keys, chunk_iter)
+[2025-08-04T14:24:52.201+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 929, in _execute_insert
+[2025-08-04T14:24:52.201+0000] {subprocess.py:93} INFO -     result = conn.execute(self.table.insert(), data)
+[2025-08-04T14:24:52.202+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+[2025-08-04T14:24:52.202+0000] {subprocess.py:93} INFO -     return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+[2025-08-04T14:24:52.203+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+[2025-08-04T14:24:52.203+0000] {subprocess.py:93} INFO -     return connection._execute_clauseelement(
+[2025-08-04T14:24:52.204+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+[2025-08-04T14:24:52.204+0000] {subprocess.py:93} INFO -     ret = self._execute_context(
+[2025-08-04T14:24:52.205+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+[2025-08-04T14:24:52.205+0000] {subprocess.py:93} INFO -     self._handle_dbapi_exception(
+[2025-08-04T14:24:52.206+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+[2025-08-04T14:24:52.206+0000] {subprocess.py:93} INFO -     util.raise_(
+[2025-08-04T14:24:52.207+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+[2025-08-04T14:24:52.207+0000] {subprocess.py:93} INFO -     raise exception
+[2025-08-04T14:24:52.208+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+[2025-08-04T14:24:52.208+0000] {subprocess.py:93} INFO -     self.dialect.do_executemany(
+[2025-08-04T14:24:52.209+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+[2025-08-04T14:24:52.209+0000] {subprocess.py:93} INFO -     context._psycopg2_fetched_rows = xtras.execute_values(
+[2025-08-04T14:24:52.210+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/extras.py", line 1299, in execute_values
+[2025-08-04T14:24:52.211+0000] {subprocess.py:93} INFO -     cur.execute(b''.join(parts))
+[2025-08-04T14:24:52.211+0000] {subprocess.py:93} INFO - sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "bulk_dim_cliente_pkey"
+[2025-08-04T14:24:52.212+0000] {subprocess.py:93} INFO - DETAIL:  Key (customer_id)=(TB-21520) already exists.
+[2025-08-04T14:24:52.212+0000] {subprocess.py:93} INFO - 
+[2025-08-04T14:24:52.213+0000] {subprocess.py:93} INFO - [SQL: INSERT INTO public.bulk_dim_cliente (customer_id, customer_name, segment, country, city, state, postal_code, region) VALUES (%(customer_id)s, %(customer_name)s, %(segment)s, %(country)s, %(city)s, %(state)s, %(postal_code)s, %(region)s)]
+[2025-08-04T14:24:52.213+0000] {subprocess.py:93} INFO - [parameters: ({'customer_id': 'CG-12520', 'customer_name': 'Claire Gute', 'segment': 'Consumer', 'country': 'United States', 'city': 'Henderson', 'state': 'Kentucky', 'postal_code': 42420, 'region': 'South'}, {'customer_id': 'DV-13045', 'customer_name': 'Darrin Van Huff', 'segment': 'Corporate', 'country': 'United States', 'city': 'Los Angeles', 'state': 'California', 'postal_code': 90036, 'region': 'West'}, {'customer_id': 'SO-20335', 'customer_name': "Sean O'Donnell", 'segment': 'Consumer', 'country': 'United States', 'city': 'Fort Lauderdale', 'state': 'Florida', 'postal_code': 33311, 'region': 'South'}, {'customer_id': 'BH-11710', 'customer_name': 'Brosina Hoffman', 'segment': 'Consumer', 'country': 'United States', 'city': 'Los Angeles', 'state': 'California', 'postal_code': 90032, 'region': 'West'}, {'customer_id': 'AA-10480', 'customer_name': 'Andrew Allen', 'segment': 'Consumer', 'country': 'United States', 'city': 'Concord', 'state': 'North Carolina', 'postal_code': 28027, 'region': 'South'}, {'customer_id': 'IM-15070', 'customer_name': 'Irene Maddox', 'segment': 'Consumer', 'country': 'United States', 'city': 'Seattle', 'state': 'Washington', 'postal_code': 98103, 'region': 'West'}, {'customer_id': 'HP-14815', 'customer_name': 'Harold Pawlan', 'segment': 'Home Office', 'country': 'United States', 'city': 'Fort Worth', 'state': 'Texas', 'postal_code': 76106, 'region': 'Central'}, {'customer_id': 'PK-19075', 'customer_name': 'Pete Kriz', 'segment': 'Consumer', 'country': 'United States', 'city': 'Madison', 'state': 'Wisconsin', 'postal_code': 53711, 'region': 'Central'}  ... displaying 10 of 4910 total bound parameter sets ...  {'customer_id': 'DB-13060', 'customer_name': 'Dave Brooks', 'segment': 'Consumer', 'country': 'United States', 'city': 'Costa Mesa', 'state': 'California', 'postal_code': 92627, 'region': 'West'}, {'customer_id': 'CC-12220', 'customer_name': 'Chris Cortes', 'segment': 'Consumer', 'country': 'United States', 'city': 'Westminster', 'state': 'California', 'postal_code': 92683, 'region': 'West'})]
+[2025-08-04T14:24:52.214+0000] {subprocess.py:93} INFO - (Background on this error at: https://sqlalche.me/e/14/gkpj)
+[2025-08-04T14:24:52.309+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-08-04T14:24:52.332+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-08-04T14:24:52.341+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=pipeline_medallon, task_id=cargar_a_bulk, execution_date=20250804T142410, start_date=20250804T142450, end_date=20250804T142452
+[2025-08-04T14:24:52.409+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 159 for task cargar_a_bulk (Bash command failed. The command returned a non-zero exit code 1.; 181)
+[2025-08-04T14:24:52.452+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-08-04T14:24:52.533+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

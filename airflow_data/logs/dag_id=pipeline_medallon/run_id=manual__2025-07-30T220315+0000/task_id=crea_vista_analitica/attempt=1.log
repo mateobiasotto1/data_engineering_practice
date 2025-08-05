@@ -1,0 +1,23 @@
+[2025-07-30T22:03:36.291+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_medallon.crea_vista_analitica manual__2025-07-30T22:03:15+00:00 [queued]>
+[2025-07-30T22:03:36.384+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_medallon.crea_vista_analitica manual__2025-07-30T22:03:15+00:00 [queued]>
+[2025-07-30T22:03:36.385+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-07-30T22:03:36.427+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): crea_vista_analitica> on 2025-07-30 22:03:15+00:00
+[2025-07-30T22:03:36.432+0000] {standard_task_runner.py:60} INFO - Started process 105 to run task
+[2025-07-30T22:03:36.438+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_medallon', 'crea_vista_analitica', 'manual__2025-07-30T22:03:15+00:00', '--job-id', '62', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_medallon_dag.py', '--cfg-path', '/tmp/tmp_9molbd4']
+[2025-07-30T22:03:36.441+0000] {standard_task_runner.py:88} INFO - Job 62: Subtask crea_vista_analitica
+[2025-07-30T22:03:36.560+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_medallon.crea_vista_analitica manual__2025-07-30T22:03:15+00:00 [running]> on host 70eaa744a05c
+[2025-07-30T22:03:36.738+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mateo.biasotto' AIRFLOW_CTX_DAG_ID='pipeline_medallon' AIRFLOW_CTX_TASK_ID='crea_vista_analitica' AIRFLOW_CTX_EXECUTION_DATE='2025-07-30T22:03:15+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-30T22:03:15+00:00'
+[2025-07-30T22:03:36.739+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-07-30T22:03:36.740+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/airflow/scripts/04_crea_vista_analitica.py']
+[2025-07-30T22:03:36.748+0000] {subprocess.py:86} INFO - Output:
+[2025-07-30T22:03:36.876+0000] {subprocess.py:93} INFO - 🔗 Conectado a PostgreSQL en postgres:5432/medallon_db
+[2025-07-30T22:03:36.877+0000] {subprocess.py:93} INFO - ▶️ Ejecutando: /opt/airflow/sql/04_vista_analisis.sql
+[2025-07-30T22:03:36.878+0000] {subprocess.py:93} INFO - ⚠️ Error ejecutando el script de la vista:
+[2025-07-30T22:03:36.879+0000] {subprocess.py:93} INFO - relation "staging.fact_ventas" does not exist
+[2025-07-30T22:03:36.879+0000] {subprocess.py:93} INFO - LINE 22: FROM staging.fact_ventas f
+[2025-07-30T22:03:36.880+0000] {subprocess.py:93} INFO -               ^
+[2025-07-30T22:03:36.881+0000] {subprocess.py:93} INFO - 
+[2025-07-30T22:03:36.886+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-07-30T22:03:36.944+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=pipeline_medallon, task_id=crea_vista_analitica, execution_date=20250730T220315, start_date=20250730T220336, end_date=20250730T220336
+[2025-07-30T22:03:37.011+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-07-30T22:03:37.065+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

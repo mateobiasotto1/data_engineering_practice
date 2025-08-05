@@ -1,0 +1,25 @@
+[2025-07-31T14:54:44.674+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_medallon.cargar_a_bulk manual__2025-07-31T14:54:01.144160+00:00 [queued]>
+[2025-07-31T14:54:44.796+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_medallon.cargar_a_bulk manual__2025-07-31T14:54:01.144160+00:00 [queued]>
+[2025-07-31T14:54:44.797+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-07-31T14:54:44.857+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): cargar_a_bulk> on 2025-07-31 14:54:01.144160+00:00
+[2025-07-31T14:54:44.862+0000] {standard_task_runner.py:60} INFO - Started process 180 to run task
+[2025-07-31T14:54:44.866+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_medallon', 'cargar_a_bulk', 'manual__2025-07-31T14:54:01.144160+00:00', '--job-id', '93', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_medallon_dag.py', '--cfg-path', '/tmp/tmpgbei8yh3']
+[2025-07-31T14:54:44.868+0000] {standard_task_runner.py:88} INFO - Job 93: Subtask cargar_a_bulk
+[2025-07-31T14:54:44.959+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_medallon.cargar_a_bulk manual__2025-07-31T14:54:01.144160+00:00 [running]> on host 70eaa744a05c
+[2025-07-31T14:54:45.117+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mateo.biasotto' AIRFLOW_CTX_DAG_ID='pipeline_medallon' AIRFLOW_CTX_TASK_ID='cargar_a_bulk' AIRFLOW_CTX_EXECUTION_DATE='2025-07-31T14:54:01.144160+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-31T14:54:01.144160+00:00'
+[2025-07-31T14:54:45.119+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-07-31T14:54:45.122+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/airflow/scripts/04_carga_a_transito.py']
+[2025-07-31T14:54:45.132+0000] {subprocess.py:86} INFO - Output:
+[2025-07-31T14:54:46.205+0000] {subprocess.py:93} INFO - 🔗 Conectando a MinIO en minio:9000...
+[2025-07-31T14:54:46.205+0000] {subprocess.py:93} INFO - ⬇️ Descargando 'data_sales_silver.parquet' desde bucket 'dev-local-silver'...
+[2025-07-31T14:54:46.206+0000] {subprocess.py:93} INFO - 📊 Datos cargados desde Silver: 9994 filas, 21 columnas
+[2025-07-31T14:54:46.206+0000] {subprocess.py:93} INFO - 🧑‍🤝‍🧑 dim_cliente: 4910 filas
+[2025-07-31T14:54:46.206+0000] {subprocess.py:93} INFO - 📦 dim_producto: 1894 filas
+[2025-07-31T14:54:46.207+0000] {subprocess.py:93} INFO - 📈 fact_ventas: 9994 filas
+[2025-07-31T14:54:46.207+0000] {subprocess.py:93} INFO - ✅ Guardado en Gold: dim_cliente.parquet
+[2025-07-31T14:54:46.208+0000] {subprocess.py:93} INFO - ✅ Guardado en Gold: dim_producto.parquet
+[2025-07-31T14:54:46.208+0000] {subprocess.py:93} INFO - ✅ Guardado en Gold: fact_ventas.parquet
+[2025-07-31T14:54:46.298+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-07-31T14:54:46.354+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=pipeline_medallon, task_id=cargar_a_bulk, execution_date=20250731T145401, start_date=20250731T145444, end_date=20250731T145446
+[2025-07-31T14:54:46.404+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-07-31T14:54:46.438+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

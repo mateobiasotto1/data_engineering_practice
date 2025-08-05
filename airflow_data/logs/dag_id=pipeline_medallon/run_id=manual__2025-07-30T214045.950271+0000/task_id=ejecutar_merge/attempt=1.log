@@ -1,0 +1,56 @@
+[2025-07-30T21:41:32.002+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_medallon.ejecutar_merge manual__2025-07-30T21:40:45.950271+00:00 [queued]>
+[2025-07-30T21:41:32.095+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_medallon.ejecutar_merge manual__2025-07-30T21:40:45.950271+00:00 [queued]>
+[2025-07-30T21:41:32.095+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-07-30T21:41:32.143+0000] {taskinstance.py:2191} INFO - Executing <Task(PostgresOperator): ejecutar_merge> on 2025-07-30 21:40:45.950271+00:00
+[2025-07-30T21:41:32.148+0000] {standard_task_runner.py:60} INFO - Started process 440 to run task
+[2025-07-30T21:41:32.152+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_medallon', 'ejecutar_merge', 'manual__2025-07-30T21:40:45.950271+00:00', '--job-id', '36', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_medallon_dag.py', '--cfg-path', '/tmp/tmppc_dvdop']
+[2025-07-30T21:41:32.154+0000] {standard_task_runner.py:88} INFO - Job 36: Subtask ejecutar_merge
+[2025-07-30T21:41:32.268+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_medallon.ejecutar_merge manual__2025-07-30T21:40:45.950271+00:00 [running]> on host 70eaa744a05c
+[2025-07-30T21:41:32.448+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mateo.biasotto' AIRFLOW_CTX_DAG_ID='pipeline_medallon' AIRFLOW_CTX_TASK_ID='ejecutar_merge' AIRFLOW_CTX_EXECUTION_DATE='2025-07-30T21:40:45.950271+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-30T21:40:45.950271+00:00'
+[2025-07-30T21:41:32.448+0000] {sql.py:276} INFO - Executing: CALL merge_bulk_to_final();
+[2025-07-30T21:41:32.462+0000] {base.py:83} INFO - Using connection ID 'postgres_medallon' for task execution.
+[2025-07-30T21:41:32.562+0000] {base.py:83} INFO - Using connection ID 'postgres_medallon' for task execution.
+[2025-07-30T21:41:32.592+0000] {sql.py:450} INFO - Running statement: CALL merge_bulk_to_final();, parameters: None
+[2025-07-30T21:41:32.623+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/operators/sql.py", line 282, in execute
+    output = hook.run(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/hooks/sql.py", line 398, in run
+    self._run_command(cur, sql_statement, parameters)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/hooks/sql.py", line 455, in _run_command
+    cur.execute(sql_statement)
+psycopg2.errors.InvalidColumnReference: there is no unique or exclusion constraint matching the ON CONFLICT specification
+CONTEXT:  SQL statement "INSERT INTO staging.dim_cliente
+    SELECT DISTINCT ON (customer_id) *
+    FROM public.bulk_dim_cliente
+    ORDER BY customer_id
+    ON CONFLICT (customer_id) DO UPDATE
+    SET customer_name = EXCLUDED.customer_name,
+        segment       = EXCLUDED.segment,
+        country       = EXCLUDED.country,
+        city          = EXCLUDED.city,
+        state         = EXCLUDED.state,
+        postal_code   = EXCLUDED.postal_code,
+        region        = EXCLUDED.region"
+PL/pgSQL function merge_bulk_to_final() line 6 at SQL statement
+
+[2025-07-30T21:41:32.635+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=pipeline_medallon, task_id=ejecutar_merge, execution_date=20250730T214045, start_date=20250730T214132, end_date=20250730T214132
+[2025-07-30T21:41:32.673+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 36 for task ejecutar_merge (there is no unique or exclusion constraint matching the ON CONFLICT specification
+CONTEXT:  SQL statement "INSERT INTO staging.dim_cliente
+    SELECT DISTINCT ON (customer_id) *
+    FROM public.bulk_dim_cliente
+    ORDER BY customer_id
+    ON CONFLICT (customer_id) DO UPDATE
+    SET customer_name = EXCLUDED.customer_name,
+        segment       = EXCLUDED.segment,
+        country       = EXCLUDED.country,
+        city          = EXCLUDED.city,
+        state         = EXCLUDED.state,
+        postal_code   = EXCLUDED.postal_code,
+        region        = EXCLUDED.region"
+PL/pgSQL function merge_bulk_to_final() line 6 at SQL statement
+; 440)
+[2025-07-30T21:41:32.686+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-07-30T21:41:32.713+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

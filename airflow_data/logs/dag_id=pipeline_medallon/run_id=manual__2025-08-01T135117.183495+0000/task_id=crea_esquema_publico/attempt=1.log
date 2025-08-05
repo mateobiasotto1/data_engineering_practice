@@ -1,0 +1,19 @@
+[2025-08-01T13:51:25.034+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_medallon.crea_esquema_publico manual__2025-08-01T13:51:17.183495+00:00 [queued]>
+[2025-08-01T13:51:25.056+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_medallon.crea_esquema_publico manual__2025-08-01T13:51:17.183495+00:00 [queued]>
+[2025-08-01T13:51:25.056+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-08-01T13:51:25.111+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): crea_esquema_publico> on 2025-08-01 13:51:17.183495+00:00
+[2025-08-01T13:51:25.117+0000] {standard_task_runner.py:60} INFO - Started process 56 to run task
+[2025-08-01T13:51:25.129+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_medallon', 'crea_esquema_publico', 'manual__2025-08-01T13:51:17.183495+00:00', '--job-id', '122', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_medallon_dag.py', '--cfg-path', '/tmp/tmpyyxo03kp']
+[2025-08-01T13:51:25.132+0000] {standard_task_runner.py:88} INFO - Job 122: Subtask crea_esquema_publico
+[2025-08-01T13:51:25.329+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_medallon.crea_esquema_publico manual__2025-08-01T13:51:17.183495+00:00 [running]> on host 70eaa744a05c
+[2025-08-01T13:51:25.553+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mateo.biasotto' AIRFLOW_CTX_DAG_ID='pipeline_medallon' AIRFLOW_CTX_TASK_ID='crea_esquema_publico' AIRFLOW_CTX_EXECUTION_DATE='2025-08-01T13:51:17.183495+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-01T13:51:17.183495+00:00'
+[2025-08-01T13:51:25.555+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-01T13:51:25.557+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/airflow/scripts/01_crea_esquema_publico.py']
+[2025-08-01T13:51:25.569+0000] {subprocess.py:86} INFO - Output:
+[2025-08-01T13:51:25.783+0000] {subprocess.py:93} INFO - 🔗 Conectado a PostgreSQL en postgres:5432/medallon_db
+[2025-08-01T13:51:25.784+0000] {subprocess.py:93} INFO - ▶️ Ejecutando: /opt/airflow/sql/01_crear_tablas_public.sql
+[2025-08-01T13:51:25.785+0000] {subprocess.py:93} INFO - ✅ Script ejecutado correctamente
+[2025-08-01T13:51:25.793+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-08-01T13:51:25.882+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=pipeline_medallon, task_id=crea_esquema_publico, execution_date=20250801T135117, start_date=20250801T135125, end_date=20250801T135125
+[2025-08-01T13:51:25.948+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-08-01T13:51:26.007+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

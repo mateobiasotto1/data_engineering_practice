@@ -1,0 +1,19 @@
+[2025-08-05T19:30:04.641+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_medallon.cargar_bronze manual__2025-08-05T19:29:40.968196+00:00 [queued]>
+[2025-08-05T19:30:04.679+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_medallon.cargar_bronze manual__2025-08-05T19:29:40.968196+00:00 [queued]>
+[2025-08-05T19:30:04.680+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-08-05T19:30:04.746+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): cargar_bronze> on 2025-08-05 19:29:40.968196+00:00
+[2025-08-05T19:30:04.752+0000] {standard_task_runner.py:60} INFO - Started process 88 to run task
+[2025-08-05T19:30:04.756+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_medallon', 'cargar_bronze', 'manual__2025-08-05T19:29:40.968196+00:00', '--job-id', '265', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_medallon_dag.py', '--cfg-path', '/tmp/tmpy8zwy60r']
+[2025-08-05T19:30:04.759+0000] {standard_task_runner.py:88} INFO - Job 265: Subtask cargar_bronze
+[2025-08-05T19:30:04.864+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_medallon.cargar_bronze manual__2025-08-05T19:29:40.968196+00:00 [running]> on host 70eaa744a05c
+[2025-08-05T19:30:05.091+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mateo.biasotto' AIRFLOW_CTX_DAG_ID='pipeline_medallon' AIRFLOW_CTX_TASK_ID='cargar_bronze' AIRFLOW_CTX_EXECUTION_DATE='2025-08-05T19:29:40.968196+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-05T19:29:40.968196+00:00'
+[2025-08-05T19:30:05.092+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-05T19:30:05.094+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/airflow/scripts/minio_01_local_a_bronze.py']
+[2025-08-05T19:30:05.108+0000] {subprocess.py:86} INFO - Output:
+[2025-08-05T19:30:05.750+0000] {subprocess.py:93} INFO - Conectando a MinIO en minio:9000 ...
+[2025-08-05T19:30:05.751+0000] {subprocess.py:93} INFO - Bucket 'dev-local-bronze' ya existe
+[2025-08-05T19:30:05.753+0000] {subprocess.py:93} INFO - Archivo '/opt/airflow/scripts/data.csv' subido como 'data_sales.csv' a bucket 'dev-local-bronze'
+[2025-08-05T19:30:05.796+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-08-05T19:30:05.901+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=pipeline_medallon, task_id=cargar_bronze, execution_date=20250805T192940, start_date=20250805T193004, end_date=20250805T193005
+[2025-08-05T19:30:06.017+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-08-05T19:30:06.120+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
